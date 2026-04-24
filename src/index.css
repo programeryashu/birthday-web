@@ -1,0 +1,176 @@
+@import "tailwindcss";
+
+/* ══════════════════════════════════════════
+   BIRTHDAY SURPRISE - DESIGN SYSTEM
+   ══════════════════════════════════════════ */
+
+@theme {
+  --color-rose: #ff6b9d;
+  --color-rose-light: #ff9ecc;
+  --color-blush: #ffb3cc;
+  --color-gold: #ffd700;
+  --color-gold-dark: #e5a800;
+  --color-lavender: #c9b8ff;
+  --color-sky: #a8d8f0;
+  --color-cream: #fff8f0;
+  --color-deep: #1a0a1e;
+  --color-deep-purple: #3d0f5c;
+  --color-rich-purple: #6a1a8a;
+  --font-display: 'Playfair Display', serif;
+  --font-script: 'Dancing Script', cursive;
+  --font-sans: 'DM Sans', sans-serif;
+}
+
+/* ── Base ── */
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Glassmorphism ── */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 107, 157, 0.4);
+  border-radius: 3px;
+}
+
+/* ── Canvas ── */
+#bg-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ── Letter cursor ── */
+.letter-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  background: var(--color-rose);
+  animation: blink 0.7s infinite;
+  vertical-align: text-bottom;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ── Flame flicker ── */
+.flame {
+  animation: flicker 0.3s ease-in-out infinite alternate;
+  transform-origin: center bottom;
+}
+
+@keyframes flicker {
+  0% { transform: scale(1) rotate(-2deg); opacity: 0.9; }
+  50% { transform: scale(1.15) rotate(2deg); opacity: 1; }
+  100% { transform: scale(0.92) rotate(-1deg); opacity: 0.85; }
+}
+
+/* ── Floating hearts ── */
+.heart-float {
+  position: absolute;
+  animation: heart-rise var(--dur, 4s) var(--del, 0s) ease-in infinite;
+  opacity: 0;
+  font-size: 1.2rem;
+  pointer-events: none;
+}
+
+@keyframes heart-rise {
+  0% { opacity: 0; transform: translateY(0) scale(0.8); }
+  20% { opacity: 1; }
+  80% { opacity: 0.6; }
+  100% { opacity: 0; transform: translateY(-220px) scale(1.2) rotate(15deg); }
+}
+
+/* ── Balloon bob ── */
+.balloon-bob {
+  animation: bob var(--spd, 2s) var(--del, 0s) ease-in-out infinite alternate;
+}
+
+@keyframes bob {
+  from { transform: translateY(0); }
+  to { transform: translateY(-16px); }
+}
+
+/* ── Confetti ── */
+.confetti-piece {
+  position: fixed;
+  pointer-events: none;
+  z-index: 500;
+  border-radius: 2px;
+  animation: confetti-fall var(--dur, 2s) var(--del, 0s) ease-in forwards;
+}
+
+@keyframes confetti-fall {
+  0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+
+/* ── Firework particles ── */
+.fw-particle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 500;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  animation: fw-fly var(--dur, 0.8s) var(--del, 0s) ease-out forwards;
+}
+
+@keyframes fw-fly {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(var(--tx, 0px), var(--ty, -80px)) scale(0); opacity: 0; }
+}
+
+/* ── Glow pulse for title ── */
+@keyframes glow-pulse {
+  from { text-shadow: 0 0 40px rgba(255, 107, 157, 0.7), 0 0 80px rgba(255, 107, 157, 0.4); }
+  to { text-shadow: 0 0 60px rgba(255, 200, 100, 0.9), 0 0 120px rgba(255, 107, 157, 0.6); }
+}
+
+/* ── Theme Overrides ── */
+body.theme-neon {
+  --color-rose: #00ffcc;
+  --color-blush: #00e5ff;
+  --color-gold: #ffff00;
+  --color-lavender: #ff00ff;
+}
+
+body.theme-pink {
+  --color-rose: #ff80ab;
+  --color-blush: #ffb3c6;
+  --color-gold: #ff4081;
+  --color-lavender: #f48fb1;
+}
+
+body.theme-premium {
+  --color-rose: #c9a84c;
+  --color-blush: #e8d5a3;
+  --color-gold: #c9a84c;
+  --color-lavender: #9e8b5e;
+}
