@@ -37,13 +37,13 @@ export function StoreProvider({ children }) {
       try {
         const { data, error } = await supabase
           .from('birthday_config')
-          .select('data')
-          .eq('id', 'default')
+          .select('config')
+          .eq('id', 'main')
           .single()
 
-        if (data && data.data) {
-          setConfig(data.data)
-          saveLocalState(data.data)
+        if (data && data.config) {
+          setConfig(data.config)
+          saveLocalState(data.config)
         } else if (error && error.code !== 'PGRST116') {
           console.error('Supabase fetch error:', error)
         }
@@ -68,7 +68,7 @@ export function StoreProvider({ children }) {
       try {
         await supabase
           .from('birthday_config')
-          .upsert({ id: 'default', data: config, updated_at: new Error().stack ? new Date().toISOString() : undefined })
+          .upsert({ id: 'main', config: config, updated_at: new Date().toISOString() })
       } catch (err) {
         console.error('Failed to save to Supabase:', err)
       }
