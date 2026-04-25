@@ -101,8 +101,8 @@ export default function CatchGame({ onUnlock }) {
       {/* Basket */}
       <motion.div 
         className="absolute bottom-4 text-4xl"
-        animate={{ left: `${basketX}%` }}
-        style={{ transform: 'translateX(-50%)' }}
+        animate={{ x: `${basketX}%` }}
+        style={{ left: 0, marginLeft: '-1.25rem' }} // Half of 4xl (2.5rem approx) for centering
       >
         🛒
       </motion.div>

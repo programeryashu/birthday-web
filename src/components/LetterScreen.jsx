@@ -37,14 +37,11 @@ export default function LetterScreen({ onComplete }) {
   const indexRef = useRef(0)
   const timerRef = useRef(null)
 
-  const [prevLetter, setPrevLetter] = useState(config.letter)
-
-  if (config.letter !== prevLetter) {
-    setPrevLetter(config.letter)
+  useEffect(() => {
     setText('')
     setDone(false)
     setShowMade(false)
-  }
+  }, [config.letter])
 
   useEffect(() => {
     indexRef.current = 0

@@ -13,11 +13,11 @@ export default function AdminPanel() {
   const [form, setForm] = useState(config)
   const [prevConfig, setPrevConfig] = useState(config)
 
-  if (config !== prevConfig) {
-    setPrevConfig(config)
+  // Sync form with store config when it changes
+  useEffect(() => {
     setForm(config)
     setIsUnlocked(!config.adminPw)
-  }
+  }, [config])
 
   // Sync body theme class with config theme
   useEffect(() => {
