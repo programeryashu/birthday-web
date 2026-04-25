@@ -389,6 +389,28 @@ export default function AdminPanel() {
                       )}
                     </div>
                   </section>
+                  
+                  {/* Music Settings */}
+                  <section>
+                    <h3 className="text-xs uppercase tracking-widest text-[var(--color-blush)] mb-4">🎵 Music Settings</h3>
+                    <div className="space-y-4 bg-white/5 p-4 rounded-2xl border border-white/10">
+                      <div>
+                        <label className="flex justify-between text-xs text-white/60 mb-2 ml-1">
+                          <span>Music Volume</span>
+                          <span className="text-[var(--color-rose)]">{Math.round((form.musicVolume || 0.6) * 100)}%</span>
+                        </label>
+                        <input 
+                          type="range"
+                          min="0"
+                          max="1"
+                          step="0.01"
+                          className="w-full accent-[var(--color-rose)] cursor-pointer"
+                          value={form.musicVolume || 0.6}
+                          onChange={e => setForm(prev => ({ ...prev, musicVolume: parseFloat(e.target.value) }))}
+                        />
+                      </div>
+                    </div>
+                  </section>
 
                   {/* Security Section */}
                   <section>

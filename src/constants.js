@@ -21,5 +21,6 @@ export const DEFAULTS = {
     { date: 'Today', title: 'Your Big Day!', description: 'Celebrating you and the amazing person you are. Let\'s make more memories! 🎉' }
   ],
   musicUrl: '',
+  musicVolume: 0.6,
   secretMessage: 'You are truly special. Wishing you happiness always ❤️',
 };

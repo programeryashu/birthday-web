@@ -1,4 +1,5 @@
 import { useRef, useCallback, useEffect, useState } from 'react'
+import { useStore } from '../useStore'
 
 const MELODY = [
   [261.63,.4],[261.63,.2],[293.66,.6],[261.63,.6],[349.23,.6],[329.63,1.2],
@@ -13,6 +14,7 @@ export default function MusicPlayer({ currentScreen }) {
   const timeoutRef = useRef(null)
   const playingRef = useRef(false)
   const [playing, setPlaying] = useState(false)
+  const { config } = useStore()
 
   const initAudio = useCallback(() => {
     if (audioCtxRef.current) return
@@ -47,11 +49,11 @@ export default function MusicPlayer({ currentScreen }) {
 
   const start = useCallback(() => {
     initAudio()
-    gainRef.current.gain.linearRampToValueAtTime(0.6, audioCtxRef.current.currentTime + 2)
+    gainRef.current.gain.linearRampToValueAtTime(config.musicVolume || 0.6, audioCtxRef.current.currentTime + 2)
     playingRef.current = true
     setPlaying(true)
     playNote()
-  }, [initAudio, playNote])
+  }, [initAudio, playNote, config.musicVolume])
 
   const stop = useCallback(() => {
     playingRef.current = false
@@ -73,6 +75,13 @@ export default function MusicPlayer({ currentScreen }) {
       start()
     }
   }, [currentScreen, start])
+
+  // React to volume changes
+  useEffect(() => {
+    if (gainRef.current && audioCtxRef.current && playingRef.current) {
+      gainRef.current.gain.setTargetAtTime(config.musicVolume || 0.6, audioCtxRef.current.currentTime, 0.1)
+    }
+  }, [config.musicVolume])
 
   return (
     <button
