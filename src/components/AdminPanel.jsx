@@ -197,6 +197,69 @@ export default function AdminPanel() {
                     </div>
                   </section>
 
+                  {/* Timeline Section */}
+                  <section>
+                    <div className="flex justify-between items-center mb-4">
+                      <h3 className="text-xs uppercase tracking-widest text-[var(--color-blush)]">🗓️ Journey Timeline</h3>
+                      <button 
+                        className="text-[10px] bg-white/10 hover:bg-white/20 px-2 py-1 rounded"
+                        onClick={() => setForm(prev => ({ ...prev, timeline: [...(prev.timeline || []), { date: '', title: '', description: '' }] }))}
+                      >
+                        + Add Milestone
+                      </button>
+                    </div>
+                    <div className="space-y-3 max-h-[200px] overflow-y-auto pr-2 custom-scroll">
+                      {form.timeline?.map((item, idx) => (
+                        <div key={idx} className="bg-white/5 p-3 rounded-xl border border-white/10 space-y-2 relative group">
+                          <div className="flex gap-2">
+                             <input 
+                              className="w-24 bg-white/10 border border-white/10 rounded-lg px-2 py-1 text-[10px] outline-none focus:border-[var(--color-rose)]"
+                              value={item.date}
+                              onChange={e => {
+                                const newTimeline = [...form.timeline]
+                                newTimeline[idx].date = e.target.value
+                                setForm(prev => ({ ...prev, timeline: newTimeline }))
+                              }}
+                              placeholder="Date/Phase"
+                            />
+                            <input 
+                              className="flex-1 bg-white/10 border border-white/10 rounded-lg px-3 py-1 text-xs outline-none focus:border-[var(--color-rose)] font-bold"
+                              value={item.title}
+                              onChange={e => {
+                                const newTimeline = [...form.timeline]
+                                newTimeline[idx].title = e.target.value
+                                setForm(prev => ({ ...prev, timeline: newTimeline }))
+                              }}
+                              placeholder="Milestone Title"
+                            />
+                            <button 
+                              className="text-red-400 hover:text-red-300 px-1"
+                              onClick={() => {
+                                const newTimeline = form.timeline.filter((_, i) => i !== idx)
+                                setForm(prev => ({ ...prev, timeline: newTimeline }))
+                              }}
+                            >
+                              ✕
+                            </button>
+                          </div>
+                          <textarea 
+                            className="w-full bg-white/10 border border-white/10 rounded-lg px-3 py-1.5 text-xs outline-none focus:border-[var(--color-rose)] min-h-[50px] resize-none"
+                            value={item.description}
+                            onChange={e => {
+                              const newTimeline = [...form.timeline]
+                              newTimeline[idx].description = e.target.value
+                              setForm(prev => ({ ...prev, timeline: newTimeline }))
+                            }}
+                            placeholder="Description..."
+                          />
+                        </div>
+                      ))}
+                      {(!form.timeline || form.timeline.length === 0) && (
+                        <p className="text-center text-xs text-white/30 py-4 italic">No milestones added yet.</p>
+                      )}
+                    </div>
+                  </section>
+
                   {/* Multimedia Section */}
                   <section>
                     <h3 className="text-xs uppercase tracking-widest text-[var(--color-blush)] mb-4">🎵 Multimedia</h3>
@@ -218,6 +281,59 @@ export default function AdminPanel() {
                           onChange={e => setForm(prev => ({ ...prev, secretMessage: e.target.value }))}
                         />
                       </div>
+                    </div>
+                  </section>
+
+                  {/* Memories Section */}
+                  <section>
+                    <div className="flex justify-between items-center mb-4">
+                      <h3 className="text-xs uppercase tracking-widest text-[var(--color-blush)]">📸 Memories</h3>
+                      <button 
+                        className="text-[10px] bg-white/10 hover:bg-white/20 px-2 py-1 rounded"
+                        onClick={() => setForm(prev => ({ ...prev, photos: [...(prev.photos || []), { url: '', caption: '' }] }))}
+                      >
+                        + Add Photo
+                      </button>
+                    </div>
+                    <div className="space-y-3 max-h-[200px] overflow-y-auto pr-2 custom-scroll">
+                      {form.photos?.map((photo, idx) => (
+                        <div key={idx} className="bg-white/5 p-3 rounded-xl border border-white/10 space-y-2">
+                          <div className="flex gap-2">
+                            <input 
+                              className="flex-1 bg-white/10 border border-white/10 rounded-lg px-3 py-1.5 text-xs outline-none focus:border-[var(--color-rose)]"
+                              value={photo.url}
+                              onChange={e => {
+                                const newPhotos = [...form.photos]
+                                newPhotos[idx].url = e.target.value
+                                setForm(prev => ({ ...prev, photos: newPhotos }))
+                              }}
+                              placeholder="Image URL..."
+                            />
+                            <button 
+                              className="text-red-400 hover:text-red-300 px-1"
+                              onClick={() => {
+                                const newPhotos = form.photos.filter((_, i) => i !== idx)
+                                setForm(prev => ({ ...prev, photos: newPhotos }))
+                              }}
+                            >
+                              ✕
+                            </button>
+                          </div>
+                          <input 
+                            className="w-full bg-white/10 border border-white/10 rounded-lg px-3 py-1.5 text-xs outline-none focus:border-[var(--color-rose)]"
+                            value={photo.caption}
+                            onChange={e => {
+                              const newPhotos = [...form.photos]
+                              newPhotos[idx].caption = e.target.value
+                              setForm(prev => ({ ...prev, photos: newPhotos }))
+                            }}
+                            placeholder="Caption (optional)..."
+                          />
+                        </div>
+                      ))}
+                      {(!form.photos || form.photos.length === 0) && (
+                        <p className="text-center text-xs text-white/30 py-4 italic">No photos added yet.</p>
+                      )}
                     </div>
                   </section>
 

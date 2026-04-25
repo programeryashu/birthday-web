@@ -9,7 +9,17 @@ export const DEFAULTS = {
   adminPw: '',
   showPrank: true,
   prankIntensity: 'high',
-  photos: [],
+  photos: [
+    { url: 'https://images.unsplash.com/photo-1530103862676-fa8c91abe178?w=800&q=80', caption: 'Remember this day? ✨' },
+    { url: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&q=80', caption: 'The moments we shared 🌸' },
+    { url: 'https://images.unsplash.com/photo-1513151233558-d860c5398176?w=800&q=80', caption: 'Wishing you the best always 🤍' },
+  ],
+  timeline: [
+    { date: 'The Beginning', title: 'The Day We Met', description: 'It started with a simple hello, but little did I know how special this friendship would become. 🤍' },
+    { date: 'Countless Hours', title: 'Late Night Chats', description: 'From sharing secrets to laughing at silly memes until 3 AM. 🌙' },
+    { date: 'Growth', title: 'Supporting Each Other', description: 'Through high and low, we\'ve always had each other\'s backs. 🤝' },
+    { date: 'Today', title: 'Your Big Day!', description: 'Celebrating you and the amazing person you are. Let\'s make more memories! 🎉' }
+  ],
   musicUrl: '',
   secretMessage: 'You are truly special. Wishing you happiness always ❤️',
 };

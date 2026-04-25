@@ -13,12 +13,16 @@ import BalloonScreen from './components/BalloonScreen'
 import MeterScreen from './components/MeterScreen'
 import FinalScreen from './components/FinalScreen'
 import PrankScreen from './components/PrankScreen'
+import MemoriesScreen from './components/MemoriesScreen'
+import TimelineScreen from './components/TimelineScreen'
 
 const SCREENS = [
   'landing',
   'prank',
   'curiosity',
   'letter',
+  'timeline',
+  'memories',
   'cake',
   'balloons',
   'meter',
@@ -32,8 +36,9 @@ function BirthdayApp() {
   useEffect(() => {
     // Apply theme on mount/config change
     document.body.className = config.theme ? `theme-${config.theme}` : ''
-    // Handle scrolling only on letter screen (index 3)
-    if (currentScreen === 3) {
+    // Handle scrolling for content-heavy screens
+    const currentName = SCREENS[currentScreen]
+    if (currentName === 'letter' || currentName === 'timeline') {
       document.body.classList.add('allow-scroll')
     } else {
       document.body.classList.remove('allow-scroll')
@@ -67,7 +72,7 @@ function BirthdayApp() {
   return (
     <div className="relative w-full h-full overflow-hidden">
       <Background />
-      <MusicPlayer />
+      <MusicPlayer currentScreen={currentScreen} />
       <AdminPanel />
 
       {/* Navigation Dots */}
@@ -97,15 +102,21 @@ function BirthdayApp() {
           <LetterScreen key="letter" onComplete={next} />
         )}
         {currentScreen === 4 && (
-          <CakeScreen key="cake" onComplete={next} />
+          <TimelineScreen key="timeline" onComplete={next} />
         )}
         {currentScreen === 5 && (
-          <BalloonScreen key="balloons" onComplete={next} />
+          <MemoriesScreen key="memories" onComplete={next} />
         )}
         {currentScreen === 6 && (
-          <MeterScreen key="meter" onComplete={next} />
+          <CakeScreen key="cake" onComplete={next} />
         )}
         {currentScreen === 7 && (
+          <BalloonScreen key="balloons" onComplete={next} />
+        )}
+        {currentScreen === 8 && (
+          <MeterScreen key="meter" onComplete={next} />
+        )}
+        {currentScreen === 9 && (
           <FinalScreen key="final" onRestart={restart} />
         )}
       </AnimatePresence>

@@ -7,7 +7,7 @@ const MELODY = [
   [466.16,.4],[466.16,.2],[440,.6],[349.23,.6],[392,.6],[349.23,1.5],
 ]
 
-export default function MusicPlayer() {
+export default function MusicPlayer({ currentScreen }) {
   const audioCtxRef = useRef(null)
   const gainRef = useRef(null)
   const timeoutRef = useRef(null)
@@ -67,14 +67,12 @@ export default function MusicPlayer() {
     else start()
   }, [start, stop])
 
-  // Auto-start on first click anywhere
+  // Auto-start when currentScreen reaches curiosity screen (index 2)
   useEffect(() => {
-    const handler = () => {
-      if (!playingRef.current) start()
+    if (currentScreen >= 2 && !playingRef.current) {
+      start()
     }
-    document.addEventListener('click', handler, { once: true })
-    return () => document.removeEventListener('click', handler)
-  }, [start])
+  }, [currentScreen, start])
 
   return (
     <button
