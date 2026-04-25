@@ -71,6 +71,22 @@ export default function TimelineScreen({ onComplete }) {
       {/* Decorative Glows */}
       <div className="fixed top-1/4 -left-20 w-64 h-64 bg-rose-500/10 blur-[100px] pointer-events-none" />
       <div className="fixed bottom-1/4 -right-20 w-64 h-64 bg-purple-500/10 blur-[100px] pointer-events-none" />
+
+      {/* Floating Forward Button */}
+      <motion.button
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 1 }}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        onClick={onComplete}
+        className="fixed bottom-8 right-8 z-50 w-12 h-12 md:w-14 md:h-14 bg-rose-500 rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(244,63,94,0.5)] hover:shadow-[0_0_30px_rgba(244,63,94,0.8)] transition-shadow text-white cursor-pointer"
+        title="Continue"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 md:h-7 md:w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
+      </motion.button>
     </motion.div>
   );
 }
